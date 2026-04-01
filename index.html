@@ -8,41 +8,64 @@
             font-family: Arial, sans-serif;
             background: #f4f6f8;
             text-align: center;
-            padding-top: 100px;
+            padding: 50px;
         }
         h1 {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
-        .btn {
-            display: block;
+        select {
+            padding: 10px;
+            font-size: 16px;
             width: 260px;
-            margin: 15px auto;
-            padding: 15px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            color: white;
+            margin-bottom: 20px;
         }
-        .iocl { background-color: #ff9933; }
-        .bpcl { background-color: #0072bc; }
-        .hpcl { background-color: #cc0000; }
+        iframe {
+            width: 90%;
+            height: 650px;
+            border: none;
+            display: none;
+            margin-top: 20px;
+            border-radius: 10px;
+            background: white;
+        }
     </style>
 </head>
 <body>
 
     <h1>Select Fuel Company</h1>
 
-    <!-- DIRECT LINKS (NO JS ISSUE) -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMBJC40d_2iX64KsFC3cJRkr0lcqw8MpoocSMRqgmRAeItEQ/viewform" target="_self">
-        <button class="btn iocl">IOCL</button>
-    </a>
+    <select onchange="loadForm(this.value)">
+        <option value="">-- Select Company --</option>
+        <option value="iocl">IOCL</option>
+        <option value="bpcl">BPCL</option>
+        <option value="hpcl">HPCL</option>
+    </select>
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTCmDhRT8UH4iLxkQUSVICBtQOhQ88zAmzISiVlmVJlpUmDw/viewform" target="_self">
-        <button class="btn bpcl">BPCL</button>
-    </a>
+    <iframe id="formFrame"></iframe>
 
-    <button class="btn hpcl" onclick="alert('HPCL form not added yet')">HPCL</button>
+    <script>
+        function loadForm(company) {
+            let frame = document.getElementById("formFrame");
+            let url = "";
+
+            if (company === "iocl") {
+                url = "https://docs.google.com/forms/d/e/1FAIpQLSfMBJC40d_2iX64KsFC3cJRkr0lcqw8MpoocSMRqgmRAeItEQ/viewform?embedded=true";
+            } 
+            else if (company === "bpcl") {
+                url = "https://docs.google.com/forms/d/e/1FAIpQLSdTCmDhRT8UH4iLxkQUSVICBtQOhQ88zAmzISiVlmVJlpUmDw/viewform?embedded=true";
+            } 
+            else if (company === "hpcl") {
+                url = "https://docs.google.com/forms/d/e/1FAIpQLSfQtTrYJ8rOagyFIeCCWSGxtq12vg2yi72-4OhTs1I8WdiNsQ/viewform?embedded=true";
+            } 
+            else {
+                frame.style.display = "none";
+                return;
+            }
+
+            frame.src = url;
+            frame.style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
